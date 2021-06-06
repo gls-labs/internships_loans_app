@@ -1,0 +1,18 @@
+- flash.each do |key, value|
+  ruby:
+    puts "key", key, "value", value
+    klass = if key == 'notice'
+      'success'
+    elsif key == 'alert'
+      'warning'
+    elsif key == 'error'
+      'danger'
+    elsif %w[success warning info danger]
+      key
+    else
+      'info'
+    end
+
+  .alert.alert-dismissible.fade.show class="alert-#{klass}" role="alert"
+    = value
+    button.btn-close data-bs-dismiss="alert" aria-label="Close"
