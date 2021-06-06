@@ -38,6 +38,12 @@ class DocumentsController < ApplicationController
     end
   end
 
+  def destroy
+    @document.destroy
+    flash[:info] = 'The document has been deleted'
+    redirect_to documents_path
+  end
+
   private
 
   def set_document

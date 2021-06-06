@@ -14,7 +14,7 @@
           thead
             tr
               th scope="col" Title
-              th.w-25 scope="col"
+              th scope="col"
           tbody
               - @documents.each do |document|
                 tr
@@ -24,6 +24,9 @@
                                           class: 'btn btn-link btn-sm'
                     = link_to 'Edit', edit_document_path(document),
                                       class: 'btn btn-link btn-sm'
+                    = link_to 'Remove', document,
+                              method: :delete, confirm: 'Are you sure?',
+                              class: 'btn btn-link btn-sm text-danger'
 
       - else
         .alert.alert-info.text-center role="alert" No records yet

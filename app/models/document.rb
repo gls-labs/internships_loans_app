@@ -5,7 +5,7 @@ class Document < ApplicationRecord
   belongs_to :parent, class_name: 'Document', optional: true,
                       inverse_of: :children
   has_many :children, class_name: 'Document', dependent: :destroy,
-                      inverse_of: :parent
+                      inverse_of: :parent, foreign_key: :parent_id
 
   has_one_attached :file
 
