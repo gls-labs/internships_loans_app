@@ -8,8 +8,6 @@ class DocumentsController < ApplicationController
     @documents = Document.all
   end
 
-  # def show; end
-
   def new
     @document = Document.new
   end

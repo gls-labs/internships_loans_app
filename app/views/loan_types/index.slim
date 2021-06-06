@@ -5,7 +5,7 @@
 
   .row.justify-content-center.mt-2
     .col-12.col-sm-8.col-md-6
-      .row.justify-content-end.mb-2
+      .row.justify-content-end.mb-3
         .col-3.text-end
           = link_to 'New', new_loan_type_path, class: 'btn btn-primary'
 
@@ -22,6 +22,11 @@
                   td = ltype.name
                   td = ltype.documents.count
                   td
+                    = link_to 'Edit', edit_loan_type_path(ltype),
+                                      class: 'btn btn-link btn-sm'
+                    = link_to 'Remove', ltype,
+                              method: :delete, confirm: 'Are you sure?',
+                              class: 'btn btn-link btn-sm text-danger'
 
       - else
         .alert.alert-info.text-center role="alert" No records yet

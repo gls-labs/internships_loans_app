@@ -2,7 +2,9 @@
 
 # ActiveRecord model for loan_types table
 class LoanType < ApplicationRecord
-  has_and_belongs_to_many :documents, table_name: :loan_type_documents
+  has_and_belongs_to_many :documents, join_table: :loan_type_documents,
+                                      dependent: :destroy
 
   validates :name, presence: true, uniqueness: { case_sensitive: false }
+  validates :document_ids, presence: true
 end
