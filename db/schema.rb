@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_06_194429) do
+ActiveRecord::Schema.define(version: 2021_06_06_200135) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,6 +43,32 @@ ActiveRecord::Schema.define(version: 2021_06_06_194429) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "documents", force: :cascade do |t|
+    t.string "title"
+    t.bigint "parent_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["parent_id"], name: "index_documents_on_parent_id"
+  end
+
+  create_table "loan_type_documents", force: :cascade do |t|
+    t.bigint "loan_type_id", null: false
+    t.bigint "document_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["document_id"], name: "index_loan_type_documents_on_document_id"
+    t.index ["loan_type_id"], name: "index_loan_type_documents_on_loan_type_id"
+  end
+
+  create_table "loan_types", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "documents", "documents", column: "parent_id"
+  add_foreign_key "loan_type_documents", "documents"
+  add_foreign_key "loan_type_documents", "loan_types"
 end
