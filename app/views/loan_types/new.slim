@@ -1,0 +1,25 @@
+.container-fluid
+  .row
+    .col-12
+      h1.text-center Create new loan type
+
+  = form_for @loan_type, html: { class: 'row justify-content-center mt-2' } do |f|
+    .col-12.col-sm-8.col-md-6
+      label.form-label Name
+      = f.text_field :name, class: 'form-control'
+
+      - if @loan_type.errors[:name].any?
+        .form-text.text-danger
+          = @loan_type.errors[:name].join(', ')
+
+    .col-12.col-sm-8.col-md-6
+      label.form-label Documents
+      = f.collection_check_boxes :document_ids, @documents, :id, :title do |d|
+        .form-check
+          = d.check_box class: 'form-check-input'
+          = b.label class: 'form-check-label'
+
+      - if @loan_type.errors[:document_ids].any?
+        .form-text.text-danger
+          = @loan_type.errors[:document_ids].join(', ')
+
