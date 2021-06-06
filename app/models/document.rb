@@ -10,4 +10,5 @@ class Document < ApplicationRecord
   has_one_attached :file
 
   validates :title, presence: true, uniqueness: { case_sensitive: false }
+  validates :file, attached: true
 end
