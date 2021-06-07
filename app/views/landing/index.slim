@@ -1,10 +1,22 @@
 .container-fluid
-  .row.justify-content-center.my-5
-    .col-12.col-sm-11.col-md-9
+  .row.justify-content-center.my-5.d-none.d-md-flex
+    .col-9
       .row.raffles
         .col.title.text-vertical.no-img Rifas
         .col.img = image_tag 'landing/bavaria.png', class: 'img-fluid'
         .col.img = image_tag 'landing/bamboo.png', class: 'img-fluid'
         .col.img = image_tag 'landing/adan_eva.png', class: 'img-fluid'
 
-.container-fluid.blue-stripe
+  .row.justify-content-center.my-3.d-md-none
+    .col-11.col-sm-9
+      .row.raffles
+        .col-6.img.logo
+          = image_tag 'landing/quedate-casa.png', class: 'img-fluid'
+        .col-6.title.no-img Rifas
+        .col-6.img = image_tag 'landing/bavaria.png', class: 'img-fluid'
+        .col-6.img = image_tag 'landing/bamboo.png', class: 'img-fluid'
+        .col-6.img = image_tag 'landing/adan_eva.png', class: 'img-fluid'
+        .col-6.img = image_tag 'landing/adan_eva.png', class: 'img-fluid'
+
+.container-fluid.blue-stripe.d-none.d-md-flex
+
