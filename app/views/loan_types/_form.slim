@@ -1,0 +1,26 @@
+= form_for @loan_type do |f|
+  .row.justify-content-center.mt-2
+    .col-12.col-sm-8.col-md-6
+      label.form-label Name
+      = f.text_field :name, class: 'form-control'
+
+      - if @loan_type.errors[:name].any?
+        .form-text.text-danger
+          = @loan_type.errors[:name].join(', ')
+
+  .row.justify-content-center.mt-2
+    .col-12.col-sm-8.col-md-6
+      label.form-label Documents
+      = f.collection_check_boxes :document_ids, @documents, :id, :title do |d|
+        .form-check
+          = d.check_box class: 'form-check-input'
+          = d.label class: 'form-check-label'
+
+      - if @loan_type.errors[:document_ids].any?
+        .form-text.text-danger
+          = @loan_type.errors[:document_ids].join(', ')
+
+  .row.justify-content-center.mt-4
+    .col-6.text-center
+      = f.submit :Save, class: 'btn btn-primary'
+      = link_to 'Cancel', loan_types_path, class: 'btn btn-link ms-2'

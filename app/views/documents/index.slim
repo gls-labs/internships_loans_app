@@ -1,0 +1,32 @@
+.container-fluid
+  .row
+    .col-12
+      h1.text-center Documents
+
+  .row.justify-content-center.mt-2
+    .col-12.col-sm-8.col-md-6
+      .row.justify-content-end.mb-3
+        .col-3.text-end
+          = link_to 'New', new_document_path, class: 'btn btn-primary'
+
+      - if @documents.any?
+        table.table.table-bordered.table-striped.table-hover
+          thead
+            tr
+              th scope="col" Title
+              th scope="col"
+          tbody
+              - @documents.each do |document|
+                tr
+                  td = document.title
+                  td
+                    = link_to 'Download', url_for(document.file),
+                                          class: 'btn btn-link btn-sm'
+                    = link_to 'Edit', edit_document_path(document),
+                                      class: 'btn btn-link btn-sm'
+                    = link_to 'Remove', document,
+                              method: :delete, confirm: 'Are you sure?',
+                              class: 'btn btn-link btn-sm text-danger'
+
+      - else
+        .alert.alert-info.text-center role="alert" No records yet

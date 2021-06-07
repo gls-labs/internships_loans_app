@@ -11,4 +11,7 @@ html
     = javascript_pack_tag :application, 'data-turbolinks-track': :reload
 
   body
+    = render partial: 'layouts/navbar'
+    = render partial: 'layouts/flash'
+
     = yield
