@@ -1,0 +1,47 @@
+.container-fluid
+  .row.mt-3
+    .col-12
+      h1.text-center Details of loan ##{@loan.id}
+
+  .row.justify-content-center.mt-3
+    .col-12.col-sm-8.col-md-6
+      table.table.table-bordered.table-striped.table-hover
+        tbody
+          tr
+            th style="width: 40%" Amount
+            td = number_to_currency(@loan.amount)
+          tr
+            th Type
+            td = @loan.loan_type.name
+          tr
+            th State
+            td.text-capitalize = @loan.state
+
+  .row.justify-content-center.mt-2
+    .col-12.col-sm-8.col-md-6.text-end
+      = link_to 'Edit', edit_loan_path(@loan), class: 'btn btn-outline-primary'
+      = link_to 'Remove', @loan, method: :delete,
+                                 'data-confirm': 'Are you sure?',
+                                 class: 'btn btn-outline-danger ms-2'
+
+  .row.mt-4
+    .col-12
+      h3.text-center Documents
+
+  .row.justify-content-center.mt-3
+    .col-12.col-sm-8.col-md-6
+      table.table.table-bordered.table-striped.table-hover
+        thead
+          tr
+            th Name
+            th Approved
+            th
+
+        tbody
+          - @loan.loan_documents.each do |ldoc|
+            tr
+              td.font-monospace = ldoc.document.file.filename
+              td.text-capitalize = ldoc.approved ? 'Yes' : 'No'
+              td.text-truncate
+                = link_to 'Download', url_for(ldoc.document.file),
+                          class: 'btn btn-link btn-sm'
