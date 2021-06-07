@@ -5,5 +5,5 @@ Rails.application.routes.draw do
   resources :documents
   resources :loans
 
-  root 'home#index'
+  root 'loans#index'
 end
