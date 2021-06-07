@@ -5,8 +5,10 @@ class LoansController < ApplicationController
   before_action :set_loan, :set_loan_types, only: %i[new create edit update]
 
   def index
-    @loans = Loan.includes(:loan_type, :documents)
+    @loans = Loan.includes(:loan_type, :loan_documents)
   end
+
+  def show; end
 
   def new
     @loan = Loan.new
@@ -39,7 +41,7 @@ class LoansController < ApplicationController
   private
 
   def set_loan
-    @loan = Loan.includes(:loan_type)
+    @loan = Loan.includes(:loan_type, :loan_documents).find(params[:id])
   end
 
   def set_loan_types

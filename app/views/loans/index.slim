@@ -13,16 +13,16 @@
         table.table.table-bordered.table-striped.table-hover
           thead
             tr
-              th scope="col" Name
+              th scope="col" Amount
               th scope="col" Type
               th scope="col" # documents
               th scope="col"
           tbody
               - @loans.each do |loan|
                 tr
-                  td = loan.name
+                  td = loan.amount
                   td = loan.loan_type.name
-                  td = loan.documents.count
+                  td = loan.loan_documents.count
                   td
                     = link_to 'Edit', edit_loan_path(loan),
                                       class: 'btn btn-link btn-sm'

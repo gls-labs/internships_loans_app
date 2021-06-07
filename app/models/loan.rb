@@ -3,8 +3,7 @@
 # ActiveRecord model for loans table
 class Loan < ApplicationRecord
   belongs_to :loan_type
-  has_many :documents, class_name: 'LoanDocument', dependent: :destroy,
-                       inverse_of: :loan
+  has_many :loan_documents, dependent: :destroy, inverse_of: :loan
 
   enum state: { pending: 0, started: 1, completed: 2 }
 
@@ -15,7 +14,7 @@ class Loan < ApplicationRecord
   before_save :preset_documents
 
   def all_documents_approved?
-    documents.all?(&:approved)
+    loan_documents.all?(&:approved)
   end
 
   private
@@ -26,7 +25,7 @@ class Loan < ApplicationRecord
 
   def preset_documents
     loan_type.documents.each do |document|
-      documents.build(document: document)
+      loan_documents.build(document: document)
     end
   end
 end
