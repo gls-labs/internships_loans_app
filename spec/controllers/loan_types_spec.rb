@@ -54,8 +54,8 @@ RSpec.describe LoanTypesController, type: :controller do
   end
 
   describe 'GET edit' do
+    let(:ltype) { create(:loan_type, :with_documents) }
     before(:each) do
-      ltype = create(:loan_type, :with_documents)
       get :edit, params: { id: ltype.id }
     end
 
@@ -77,6 +77,126 @@ RSpec.describe LoanTypesController, type: :controller do
 
     it 'returns a OK status' do
       expect(response).to have_http_status(:ok)
+    end
+  end
+
+  describe 'POST create' do
+    context 'saves new record' do
+      context 'with invalid parameters' do
+        before(:each) do
+          post :create, params: { loan_type: { name: nil } }
+        end
+
+        it 'renders new template' do
+          expect(response).to render_template(:new)
+        end
+
+        it 'sets an error flash message' do
+          expect(flash.to_hash).to have_key('error')
+        end
+      end
+
+      context 'with valid parameters' do
+        let(:ltype) { build(:loan_type, :with_documents) }
+        let(:loan_type) { assigns(:loan_type) }
+        let(:ltype_attrs) do
+          { name: ltype.name, document_ids: ltype.document_ids }
+        end
+
+        before(:each) do
+          post :create, params: { loan_type: ltype_attrs }
+        end
+
+        it 'has not validation errors' do
+          expect(loan_type.errors).to be_empty
+        end
+
+        it 'redirects to index page' do
+          expect(response).to redirect_to(loan_types_path)
+        end
+
+        it 'sets an success flash message' do
+          expect(subject.flash.to_hash).to have_key('success')
+        end
+      end
+
+      it 'returns a OK status' do
+        expect(response).to have_http_status(:ok)
+      end
+    end
+  end
+
+  describe 'PATCH update' do
+    context 'updates the record' do
+      let(:ltype) { create(:loan_type, :with_documents) }
+
+      context 'with invalid parameters' do
+        before(:each) do
+          patch :update, params: { id: ltype.id, loan_type: { name: nil } }
+        end
+
+        it 'renders edit template' do
+          expect(response).to render_template(:edit)
+        end
+
+        it 'sets an error flash message' do
+          expect(flash.to_hash).to have_key('error')
+        end
+      end
+
+      context 'with valid parameters' do
+        let(:loan_type) { assigns(:loan_type) }
+        let(:ltype_attrs) do
+          { name: ltype.name, document_ids: ltype.document_ids }
+        end
+
+        before(:each) do
+          patch :update, params: { id: ltype.id, loan_type: ltype_attrs }
+        end
+
+        it 'has not validation errors' do
+          expect(loan_type.errors).to be_empty
+        end
+
+        it 'redirects to index page' do
+          expect(response).to redirect_to(loan_types_path)
+        end
+
+        it 'sets an success flash message' do
+          expect(subject.flash.to_hash).to have_key('success')
+        end
+      end
+
+      it 'returns a OK status' do
+        expect(response).to have_http_status(:ok)
+      end
+    end
+  end
+
+  describe 'DELETE destroy' do
+    let(:ltype) { create(:loan_type, :with_documents) }
+    let(:loan_type) { assigns(:loan_type) }
+
+    before(:each) do
+      delete :destroy, params: { id: ltype.id }
+    end
+
+    context 'assigns @loan_type' do
+      it 'as a LoanType instance' do
+        expect(loan_type).to be_instance_of(LoanType)
+      end
+    end
+
+    it 'removes the record from database' do
+      expect(loan_type.persisted?).to be false
+    end
+
+    it 'redirects to index page' do
+      expect(response).to redirect_to(loan_types_path)
+    end
+
+    it 'sets an info flash message' do
+      expect(subject.flash.to_hash).to have_key('info')
     end
   end
 end
