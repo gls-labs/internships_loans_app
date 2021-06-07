@@ -13,7 +13,7 @@ FactoryBot.define do
   end
 
   factory :loan_type do
-    name { 'Example loan type' }
+    sequence(:name) { |n| "Example loan type #{n}" }
 
     trait :with_documents do
       after(:build) do |loan_type|
