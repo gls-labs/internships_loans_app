@@ -2,7 +2,7 @@
 
 # Controller actions for home pages
 class LoansController < ApplicationController
-  before_action :set_loan, :set_loan_types, only: %i[new create edit update]
+  before_action :set_loan, except: %i[index new create]
 
   def index
     @loans = Loan.includes(:loan_type, :loan_documents)
@@ -38,14 +38,16 @@ class LoansController < ApplicationController
     end
   end
 
+  def destroy
+    @loan.destroy
+    flash[:info] = 'The loan has been deleted'
+    redirect_to loans_path
+  end
+
   private
 
   def set_loan
     @loan = Loan.includes(:loan_type, :loan_documents).find(params[:id])
-  end
-
-  def set_loan_types
-    @loan_types = LoanType.all
   end
 
   def loan_params

@@ -11,7 +11,7 @@ class Loan < ApplicationRecord
   validates :amount, numericality: true
 
   after_initialize :init_as_pending
-  before_save :preset_documents
+  before_create :preset_documents
 
   def all_documents_approved?
     loan_documents.all?(&:approved)

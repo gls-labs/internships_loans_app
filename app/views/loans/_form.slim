@@ -11,7 +11,7 @@
   .row.justify-content-center.mt-2
     .col-12.col-sm-8.col-md-6
       label.form-label Type
-      = f.collection_select :loan_type_id, @loan_types, :id, :name,
+      = f.collection_select :loan_type_id, loan_types, :id, :name,
                             { prompt: '-Select-' }, class: 'form-control'
 
       - if @loan.errors[:loan_type].any?
