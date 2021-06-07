@@ -49,8 +49,15 @@ RSpec.describe Loan, type: :model do
 
       context 'is saved' do
         before(:each) { subject.save }
+        let(:ltype) { subject.loan_type }
+        let(:ldocs) { subject.loan_documents }
+
         it 'is persisted' do
           expect(subject.persisted?).to be true
+        end
+
+        it 'has the same documents that it loan type' do
+          expect(ldocs.map(&:document_ids)).to match_array(ltype.document_ids)
         end
       end
     end
