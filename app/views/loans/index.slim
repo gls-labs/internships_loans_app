@@ -3,7 +3,7 @@
     .col-12
       h1.text-center Loans
 
-  .row.justify-content-center.mt-2
+  .row.justify-content-center.mt-3
     .col-12.col-sm-8.col-md-6
       .row.justify-content-end.mb-3
         .col-3.text-end
@@ -20,14 +20,15 @@
           tbody
               - @loans.each do |loan|
                 tr
-                  td = loan.amount
+                  td = number_to_currency(loan.amount)
                   td = loan.loan_type.name
                   td = loan.loan_documents.count
                   td
+                    = link_to 'Details', loan, class: 'btn btn-link btn-sm'
                     = link_to 'Edit', edit_loan_path(loan),
                                       class: 'btn btn-link btn-sm'
                     = link_to 'Remove', loan,
-                              method: :delete, confirm: 'Are you sure?',
+                              method: :delete, 'data-confirm': 'Are you sure?',
                               class: 'btn btn-link btn-sm text-danger'
 
       - else
