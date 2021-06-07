@@ -29,11 +29,7 @@ RSpec.describe Document, type: :model do
     end
 
     context 'with all valid attributes' do
-      let(:file) { File.open('spec/models/sample.pdf') }
-      before(:each) do
-        subject.assign_attributes(title: 'Example document')
-        subject.file.attach(io: file, filename: 'sample.pdf')
-      end
+      subject { build(:document, :with_file) }
 
       it 'is valid' do
         expect(subject.valid?).to be true
