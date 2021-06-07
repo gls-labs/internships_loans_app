@@ -22,4 +22,11 @@ FactoryBot.define do
       end
     end
   end
+
+  factory :loan do
+    amount { 150 }
+    state { :pending }
+
+    loan_type
+  end
 end

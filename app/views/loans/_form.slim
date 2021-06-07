@@ -1,0 +1,24 @@
+= form_for @loan do |f|
+  .row.justify-content-center.mt-2
+    .col-12.col-sm-8.col-md-6
+      label.form-label Amount
+      = f.number_field :amount, class: 'form-control'
+
+      - if @loan.errors[:amount].any?
+        .form-text.text-danger
+          = @loan.errors[:amount].join(', ')
+
+  .row.justify-content-center.mt-2
+    .col-12.col-sm-8.col-md-6
+      label.form-label Type
+      = f.collection_select :loan_type_id, loan_types, :id, :name,
+                            { prompt: '-Select-' }, class: 'form-control'
+
+      - if @loan.errors[:loan_type].any?
+        .form-text.text-danger
+          = @loan.errors[:loan_type].join(', ')
+
+  .row.justify-content-center.mt-4
+    .col-6.text-center
+      = f.submit :Save, class: 'btn btn-primary'
+      = link_to 'Cancel', loans_path, class: 'btn btn-link ms-2'
