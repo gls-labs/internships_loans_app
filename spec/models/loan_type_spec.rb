@@ -29,17 +29,7 @@ RSpec.describe LoanType, type: :model do
     end
 
     context 'with all valid attributes' do
-      let(:file) { File.open('spec/models/sample.pdf') }
-      let(:document) do
-        doc = Document.new(title: 'Example document')
-        doc.file.attach(io: file, filename: 'sample.pdf')
-        doc.tap(&:save!)
-      end
-
-      before(:each) do
-        attrs = { name: 'Example loan type', document_ids: [document.id] }
-        subject.assign_attributes(attrs)
-      end
+      subject { build(:loan_type, :with_documents) }
 
       it 'is valid' do
         expect(subject.valid?).to be true
