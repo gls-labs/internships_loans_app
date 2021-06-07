@@ -34,8 +34,10 @@
   .row.justify-content-center
     .col-11.col-sm-9
       .row.delivery
-        .col-6.text
+        .col-5.col-sm-6.text
           span.blue ¿QUERÉS CONOCER
           span.skyblue NUESTRAS OPCIONES DE DELIVERY?
-          a.btn.btn-lg.yellow.blue.px-5 href="#" Click aquí
-        .col-6 = image_tag 'landing/bicycle.png', class: 'img-fluid'
+          a.btn.btn-lg.yellow.blue.px-5.d-none.d-md-flex href="#" Click aquí
+          a.btn.btn-sm.yellow.blue.px-4.mt-2.d-md-none href="#" Click aquí
+        .col-7.col-sm-6.bicycle
+          = image_tag 'landing/bicycle.png', class: 'img-fluid'
