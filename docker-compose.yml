@@ -1,0 +1,68 @@
+version: '3'
+
+networks:
+  development:
+  test:
+
+volumes:
+  db_data:
+  gem_cache:
+  shared_data:
+
+services:
+  db:
+    image: postgres:12.5-alpine
+    container_name: db
+    volumes:
+      - db_data:/var/lib/postgresql/data
+      - shared_data:/var/shared
+    networks:
+      - development
+      - test
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    ports:
+      - 5432:5432
+
+  app:
+    image: internship_loans_app:1.0
+    container_name: app
+    volumes:
+      - .:/var/app
+      - shared_data:/var/shared
+      - gem_cache:/usr/local/bundle/gems
+    networks:
+      - development
+    ports:
+      - 3000:3000
+    stdin_open: true
+    tty: true
+    env_file: docker/.env.development
+    entrypoint: docker/dev-entrypoint.sh
+    command: ['rails', 'server', '-p', '3000', '-b', '0.0.0.0']
+    environment:
+      RAILS_ENV: development
+    depends_on:
+      - db
+
+  test:
+    image: internship_loans_app:1.0
+    container_name: test
+    volumes:
+      - .:/var/app
+      - shared_data:/var/shared
+      - gem_cache:/usr/local/bundle/gems
+    networks:
+      - test
+    ports:
+      - 3001:3000
+    stdin_open: true
+    tty: true
+    env_file: docker/.env.test
+    entrypoint: docker/test-entrypoint.sh
+    command: ["rails", "-v"]
+    environment:
+      RAILS_ENV: test
+    depends_on:
+      - db
