@@ -1,0 +1,84 @@
+@import 'bootstrap/scss/bootstrap'
+
+body
+  background-color: #C9ECFC
+
+nav.navbar
+  background-color: #00387E
+
+.navbar-dark .navbar-nav .nav-link
+  color: #FFFFFF
+
+.nav-link
+  text-transform: uppercase
+  font-weight: 600
+
+.navbar-nav
+  &.buttons .nav-item + .nav-item
+    margin-left: .75rem
+
+
+.btn
+  text-transform: uppercase
+  font-weight: 600
+  padding: .25rem 1rem
+  &.skyblue
+    background-color: #C4E8FA
+    color: #00478E
+    &:hover, &:focus, &:active
+      background-color: darken(#C4E8FA, 10%)
+
+  &.yellow
+    background-color: #FCB913
+    color: #FFFFFF
+    &:hover, &:focus, &:active
+      background-color: darken(#FCB913, 10%)
+
+.title
+  color: #00387E
+  font-size: 6rem
+  font-weight: 600
+  text-transform: uppercase
+
+.text-vertical
+  writing-mode: vertical-rl
+  transform: rotate(180deg)
+
+.raffles
+  .img
+    padding-left: 0
+    display: flex
+    align-items: flex-end
+  .no-img
+    flex-grow: 0
+
+.blue-stripe
+  height: 60px
+  background-color: #008FC3
+
+.promos
+  .sitting-guy
+    display: flex
+    justify-content: flex-end
+    img
+      margin-top: -6.5rem
+      margin-right: 4rem
+      width: 240px
+
+.delivery
+  .text
+    display: flex
+    flex-direction: column
+    font-size: 2rem
+    font-weight: 800
+    text-transform: uppercase
+    .blue
+      color: #00387E
+    .skyblue
+      color: #008FC3
+
+  .btn
+    margin-top: auto
+    align-self: flex-start
+
+@import 'landing-responsive'
