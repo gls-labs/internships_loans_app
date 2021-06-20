@@ -1,0 +1,24 @@
+.container-fluid
+  .row.mt-3
+    .col-12
+      h1.text-center Upload Document To Loan ##{ @loan_document.loan.id }
+
+  .row.justify-content-center.mt-3
+    .col-12.col-sm-8.col-md-6
+      h4.text-center Document: #{@loan_document.document.title}
+
+  .row.justify-content-center.mt-3
+    .col-12.col-sm-8.col-md-6
+      table.table.table-bordered.table-striped.table-hover
+        tbody
+          tr
+            th style="width: 40%" Document
+            td = @loan_document.document.file.filename
+          tr
+            th Approved
+            td = @loan_document.approved ? 'Yes' : 'No'
+          tr
+            th User Document
+            td.text-capitalize = @loan_document.file.filename
+
+  = render partial: 'form'

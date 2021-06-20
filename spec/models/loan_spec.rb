@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-
 require 'rails_helper'
 
 RSpec.describe Loan, type: :model do
@@ -57,7 +56,7 @@ RSpec.describe Loan, type: :model do
         end
 
         it 'has the same documents that it loan type' do
-          expect(ldocs.map(&:document_ids)).to match_array(ltype.document_ids)
+          expect(ldocs.map(&:document_id)).to match_array(ltype.document_ids)
         end
       end
     end

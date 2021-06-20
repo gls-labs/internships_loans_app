@@ -35,6 +35,7 @@
           tr
             th Name
             th Approved
+            th Loaded
             th
 
         tbody
@@ -42,6 +43,8 @@
             tr
               td.font-monospace = ldoc.document.file.filename
               td.text-capitalize = ldoc.approved ? 'Yes' : 'No'
+              td =ldoc.file.present? ? 'Yes' : 'No'
               td.text-truncate
                 = link_to 'Download', url_for(ldoc.document.file),
-                          class: 'btn btn-link btn-sm'
+                          class: 'btn btn-link btn-sm', target: '_blank'
+                = link_to "Upload", edit_loan_document_path(ldoc.id)

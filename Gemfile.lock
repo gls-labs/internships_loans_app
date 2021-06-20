@@ -64,6 +64,9 @@ GEM
       zeitwerk (~> 2.3)
     addressable (2.7.0)
       public_suffix (>= 2.0.2, < 5.0)
+    annotate (3.1.1)
+      activerecord (>= 3.2, < 7.0)
+      rake (>= 10.4, < 14.0)
     ast (2.4.2)
     bindex (0.8.1)
     bootsnap (1.7.5)
@@ -258,6 +261,7 @@ PLATFORMS
 
 DEPENDENCIES
   active_storage_validations (~> 0.9.3)
+  annotate
   bootsnap (>= 1.4.4)
   byebug
   capybara (>= 3.26)
@@ -284,4 +288,4 @@ RUBY VERSION
    ruby 3.0.0p0
 
 BUNDLED WITH
-   2.2.19
+   2.2.20

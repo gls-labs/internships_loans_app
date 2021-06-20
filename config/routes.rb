@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :loan_types
   resources :documents
   resources :loans
+  resources :loan_documents, only: [:edit, :update]
 
   root 'loans#index'
 end

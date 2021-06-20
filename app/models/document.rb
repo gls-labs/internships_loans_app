@@ -1,6 +1,4 @@
 # frozen_string_literal: true
-
-# ActiveRecord model for documents table
 class Document < ApplicationRecord
   belongs_to :parent, class_name: 'Document', optional: true,
                       inverse_of: :children
@@ -12,3 +10,14 @@ class Document < ApplicationRecord
   validates :title, presence: true, uniqueness: { case_sensitive: false }
   validates :file, attached: true
 end
+
+# == Schema Information
+#
+# Table name: documents
+#
+#  id         :bigint           not null, primary key
+#  title      :string
+#  parent_id  :bigint
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
