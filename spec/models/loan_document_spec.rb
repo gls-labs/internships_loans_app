@@ -1,29 +1,22 @@
 require 'rails_helper'
 
 RSpec.describe LoanDocument, type: :model do
-  describe 'when edit loan document' do
-    
-    context 'with initial attributes' do
-      subject { build(:loan_document) }
-
-      it 'has approved false' do
-        expect(subject.approved.present?).to be false
-      end
-
-      it 'does not have an attached file' do
-        expect(subject.file.attached?).to be false
-      end
+  describe 'associations' do
+    it 'contains belongs_to associations' do
+      is_expected.to belong_to(:loan)
+      is_expected.to belong_to(:document)
     end
+  end
 
-    context 'when user uploaded document' do
-      subject { build(:loan_document, :with_file) }
+  describe 'model' do
+    let!(:loan) { create(:loan) }
 
-      it 'is valid' do
-        expect(subject.valid?).to be true
-      end
+    subject { build(:loan_document, loan: loan) }
 
-      it 'has a attached file' do
-        expect(subject.file.attached?).to be true
+    describe 'validations' do
+      it 'validate boolean for approved' do
+        is_expected.to allow_value(%(true false)).for(:approved)
+        is_expected.to_not allow_value(nil).for(:approved)
       end
     end
   end

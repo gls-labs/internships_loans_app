@@ -2,51 +2,25 @@
 require 'rails_helper'
 
 RSpec.describe Document, type: :model do
-  describe 'when is new record' do
-    before(:each) { subject.validate }
-
-    context 'with invalid attributes' do
-      it 'is invalid' do
-        expect(subject.invalid?).to be true
-      end
-
-      it 'has errors' do
-        expect(subject.errors).to_not be_empty
-      end
+  describe 'associations' do
+    it 'contains belongs_to associations' do
+      is_expected.to belong_to(:parent).optional(:true)
     end
 
-    context 'without a title' do
-      it 'has a title related error' do
-        expect(subject.errors).to have_key(:title)
-      end
+    it 'contains has_many associations' do
+      is_expected.to have_many(:children)
     end
+  end
 
-    context 'without a attached file' do
-      it 'has a file related error' do
-        expect(subject.errors).to have_key(:file)
-      end
-    end
+  describe 'model' do   
+    subject { build(:document, :with_file) }
 
-    context 'with all valid attributes' do
-      subject { build(:document, :with_file) }
+    describe 'validations' do
+      it 'valdates model attributes' do
+        is_expected.to validate_presence_of(:title)
+        is_expected.to validate_presence_of(:file)
 
-      it 'is valid' do
-        expect(subject.valid?).to be true
-      end
-
-      it 'has a title' do
-        expect(subject.title.present?).to be true
-      end
-
-      it 'has a attached file' do
-        expect(subject.file.attached?).to be true
-      end
-
-      context 'is saved' do
-        before(:each) { subject.save }
-        it 'is persisted' do
-          expect(subject.persisted?).to be true
-        end
+        is_expected.to validate_uniqueness_of(:title).case_insensitive
       end
     end
   end

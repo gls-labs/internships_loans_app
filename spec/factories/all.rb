@@ -32,7 +32,7 @@ FactoryBot.define do
 
   factory :loan_document do
     approved { false }
-    loan
+    association :loan
     association :document
 
     trait :with_file do
