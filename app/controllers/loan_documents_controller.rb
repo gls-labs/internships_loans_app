@@ -16,7 +16,7 @@ class LoanDocumentsController < ApplicationController
   private
 
   def document_params
-    params.require(:loan_document).permit(:file)
+    params.require(:loan_document).permit(:file, :status)
   end
 
   def find_loan_document
