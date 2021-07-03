@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  get 'landing' => 'landing#index'
+  resources :landing, only: [:index, :show]
 
   resources :loan_types
   resources :documents
