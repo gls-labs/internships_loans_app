@@ -16,4 +16,6 @@
 
 1. `sh docker/build.sh`
 2. `docker-compose up`
-3. Access the app at localhost:3031
+3. `docker-compose exec app bash`
+4. Run migrations inside the app container.
+5. Access the app at localhost:3031
