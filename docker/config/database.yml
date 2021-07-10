@@ -1,0 +1,19 @@
+development:
+  adapter:  postgresql
+  host:     db
+  encoding: unicode
+  database: loans_development
+  pool:     5
+  username: postgres
+  password: postgres
+  template: template0
+
+test:
+  adapter:  postgresql
+  host:     db
+  encoding: unicode
+  database: loans_test
+  pool:     5
+  username: postgres
+  password: postgres
+  template: template0

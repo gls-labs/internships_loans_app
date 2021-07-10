@@ -1,41 +1,44 @@
-FROM ruby:3.0.0-alpine
+FROM ruby:3.0.0
 
-ENV APP_PATH /var/app
-ENV BUNDLE_VERSION 2.2.19
-ENV BUNDLE_PATH /usr/local/bundle/gems
-ENV TMP_PATH /tmp/
-ENV RAILS_LOG_TO_STDOUT true
-ENV RAILS_PORT 3000
+RUN apt-get update -y
+RUN apt-get install -y build-essential libpq-dev
 
-# copy entrypoint scripts and grant execution permissions
-COPY ./docker/dev-entrypoint.sh /usr/local/bin/dev-entrypoint.sh
-COPY ./docker/test-entrypoint.sh /usr/local/bin/test-entrypoint.sh
-RUN chmod +x /usr/local/bin/dev-entrypoint.sh \
-    && chmod +x /usr/local/bin/test-entrypoint.sh
+# for a JS runtime we use Node and for yarn package management
+RUN curl -fsSL https://deb.nodesource.com/setup_11.x | bash -
+RUN apt-get install -y nodejs
+RUN apt upgrade -y nodejs
+RUN npm install -g npm
+RUN npm install -g yarn
 
-# install dependencies for application
-RUN apk -U add --no-cache \
-                build-base \
-                git \
-                postgresql-dev \
-                postgresql-client \
-                libxml2-dev \
-                libxslt-dev \
-                nodejs \
-                yarn \
-                imagemagick \
-                tzdata \
-                less \
-&& rm -rf /var/cache/apk/* \
-&& mkdir -p $APP_PATH
+RUN apt-get install -y postgresql postgresql-contrib
+RUN apt-get install -y rsync
 
+ENV DIR /var/www
 
-RUN gem install bundler --version "$BUNDLE_VERSION" \
-    && rm -rf $GEM_HOME/cache/*
+RUN mkdir $DIR
+WORKDIR $DIR
+ADD . $DIR
 
-# navigate to app directory
-WORKDIR $APP_PATH
+# install phantomjs
+RUN curl -L https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-linux-x86_64.tar.bz2 \
+   | tar -C /usr/local --no-same-owner -jx \
+  && ln -s /usr/local/phantomjs-2.1.1-linux-x86_64/bin/phantomjs /usr/local/bin/phantomjs \
+  && which phantomjs \
+  && echo "PhantomJS version $(phantomjs --version) installed"
 
-EXPOSE $RAILS_PORT
+# bundle config
+ENV BUNDLE_GEMFILE=$DIR/Gemfile \
+    BUNDLE_JOBS=2 \
+    BUNDLE_PATH=/bundle \
+    GEM_HOME=/bundle \
+    BUNDLE_BIN=/bundle/bin \
+    BUNDLE_APP_CONFIG=/bundle \
+    PATH=/bundle/bin:$PATH
 
-ENTRYPOINT [ "bundle", "exec" ]
+# bundle the gems default
+RUN cp Gemfile /
+RUN BUNDLE_GEMFILE=/Gemfile bundle
+
+# forward ssh key
+RUN echo "eval \`ssh-agent -s\`" >> ~/.bashrc
+RUN echo "ssh-add" >> ~/.bashrc

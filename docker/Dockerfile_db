@@ -1,0 +1,6 @@
+FROM postgres:13.1
+
+RUN apt-get update -y
+RUN apt-get install -y rsync
+
+RUN mkdir ~/tmp

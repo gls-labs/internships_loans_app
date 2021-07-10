@@ -16,3 +16,4 @@
 
 1. `sh docker/build.sh`
 2. `docker-compose up`
+3. Access the app at localhost:3031
