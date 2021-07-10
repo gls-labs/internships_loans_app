@@ -1,0 +1,41 @@
+section#first-section
+  .container-fluid.top
+    .content-header-fr
+      = image_tag 'new_landing/02_Wave.png', :class => 'wave'
+      .row
+        .col
+          .live-content-logo
+              figure.contenido.mb-0
+                = image_tag 'new_landing/CONTENIDO.png', :class => 'img-fluid'
+              .content-bottom
+                figure.triangles.p-0
+                  = image_tag 'new_landing/00_Triangulos.png', :class => 'img-fluid'
+                figure.in.p-0
+                  = image_tag 'new_landing/EN.png', :class => 'img-fluid'
+                figure.live.p-0
+                  = image_tag 'new_landing/VIVO.png'
+        .col.content-guitar
+          .col.img = image_tag 'new_landing/01_Guitarra.png'
+          p.nex-days Estos son los eventos en vivo en los próximos días
+  .container-fluid.bottom
+    .content-footer-fr
+      .content-slick
+        .row.align-items-center.justify-content-around
+          - 5.times do
+            .slick.col.p-2
+              .slick-header
+              .slick-body
+                p.artist.m-0 Artista / Evento
+                p.time.m-0 00 MARZO • 00:00
+                p.small.mb-0 Lorem ipsum dolor sit amet
+              .slick-footer
+                span.text 11
+                span.icon
+                  = image_tag 'new_landing/sms.png'
+                span.text 48
+                span.icon
+                  = image_tag 'new_landing/heart.png'
+          end
+
+section#second-section
+

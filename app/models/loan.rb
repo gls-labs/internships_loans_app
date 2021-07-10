@@ -1,6 +1,4 @@
 # frozen_string_literal: true
-
-# ActiveRecord model for loans table
 class Loan < ApplicationRecord
   belongs_to :loan_type
   has_many :loan_documents, dependent: :destroy, inverse_of: :loan
@@ -29,3 +27,15 @@ class Loan < ApplicationRecord
     end
   end
 end
+
+# == Schema Information
+#
+# Table name: loans
+#
+#  id           :bigint           not null, primary key
+#  amount       :float            not null
+#  state        :integer          not null
+#  loan_type_id :bigint
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#

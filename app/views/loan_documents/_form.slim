@@ -1,0 +1,14 @@
+= form_for @loan_document do |f|
+  .row.justify-content-center.mt-2
+    .col-12.col-sm-8.col-md-6
+      label.form-label Upload File
+      = f.file_field :file, class: 'form-control'
+
+      - if @loan_document.errors[:file].any?
+        .form-text.text-danger
+          = @loan_document.errors[:file].join(', ')
+
+  .row.justify-content-center.mt-4
+    .col-6.text-center
+      = f.submit :Save, class: 'btn btn-primary'
+      = link_to 'Cancel', loan_path(@loan_document.loan.id), class: 'btn btn-link ms-2'
