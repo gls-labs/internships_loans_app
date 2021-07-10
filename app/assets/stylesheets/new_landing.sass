@@ -1,0 +1,141 @@
+#first-section
+  background-color: #fff
+  position: relative
+  z-index: 1
+  overflow: hidden
+  &::before
+    background: url(/assets/new_landing/Spot.png) 0 0 repeat
+    transform: rotate(207deg)
+    background-repeat: no-repeat
+    background-size: contain
+    content: ""
+    height: 540%
+    opacity: 0.6
+    position: absolute
+    right: 0%
+    top: -451%
+    width: 100%
+    z-index: -1
+  &::after
+    background: url(/assets/new_landing/Spot-2.png)
+    background-repeat: no-repeat
+    background-size: contain
+    content: ""
+    height: 110%
+    left: 80%
+    opacity: 0.3
+    position: absolute
+    top: -71%
+    width: 100%
+    z-index: -1
+  .wave
+    position: absolute
+    right: -5px
+    max-width: 150px
+    top: 10%
+  .container-fluid.top
+    padding: 3rem 3rem
+    .content-header-fr
+      .live-content-logo
+        max-width: 500px
+        .content-bottom
+          padding: 0 15px
+          figure
+            vertical-align: top
+            display: inline-block
+          .triangles
+            width: 25%
+          .in
+            width: 25%
+            img
+              max-height: 80%
+          .live
+            width: 50%
+            img
+              width: 100%
+              height: 100%
+      .content-guitar
+        text-align: center
+        img
+          margin-right: 10rem
+          max-width: 25%
+        p
+          color: #004F9B
+          font-size: 1.5rem
+          font-weight: 500
+          max-width: 50%
+          text-align: left
+  .container-fluid.bottom
+    background-image: url(/assets/new_landing/00_Flechas.png)
+    background-position: center center
+    background-repeat: no-repeat
+    background-size: contain
+    padding-top: 1.2rem
+    padding: 3rem 3rem
+    .content-footer-fr
+      .content-slick
+        .row
+          .slick
+            border-radius: 7px
+            border: solid 1px gray
+            margin-left: 1rem
+            max-width: 300px
+            .slick-header
+              min-height: 200px
+            .slick-body
+              text-align: left
+              .artist
+                color: #002957
+                font-size: 1.4rem
+                font-weight: 600
+                text-transform: uppercase
+              .time
+                color: #004F9B
+                font-size: 1.2rem
+                font-weight: 400
+              .small
+                color: #004F9B
+                font-size: .6rem
+                font-weight: 400
+            .slick-footer
+              .text
+                font-size: 1rem
+                color: #637D89
+              .icon
+                margin: 0 .5rem
+                cursor: pointer
+                img
+                  max-height: 20px
+                
+#second-section
+
+@media screen and ( max-width:  768px)
+  #first-section
+    .wave
+      display: none
+    &::before
+      height: 550%
+      right: -145%
+      top: -445%
+      width: 180%
+    &::after
+      display: none
+    .slick:nth-child(3),
+    .slick:nth-child(4),
+    .slick:nth-child(5)
+      display: none
+    .content-guitar
+      p
+        font-size: 1.4rem !important
+        font-weight: 600 !important
+        max-width: 100% !important
+        text-align: left
+
+  
+
+@media screen and ( max-width:  1200px)
+  .slick:nth-child(3),
+  .slick:nth-child(4)
+    display: none
+      
+  
