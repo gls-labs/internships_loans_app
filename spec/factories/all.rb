@@ -18,7 +18,7 @@ FactoryBot.define do
     trait :with_documents do
       after(:build) do |loan_type|
         docs = create_list(:document, 2, :with_file)
-        loan_type.document_ids = docs.map(&:id)
+        loan_type.documents << docs
       end
     end
   end
@@ -27,6 +27,19 @@ FactoryBot.define do
     amount { 150 }
     state { :pending }
 
-    loan_type
+    loan_type factory: [:loan_type, :with_documents]
+  end
+
+  factory :loan_document do
+    approved { false }
+    association :loan
+    association :document
+
+    trait :with_file do
+      after :build do |loan_document|
+        file = File.open('spec/factories/sample.pdf')
+        loan_document.file.attach(io: file, filename: 'sample.pdf')
+      end
+    end
   end
 end

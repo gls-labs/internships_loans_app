@@ -29,14 +29,10 @@ gem 'bootsnap', '>= 1.4.4', require: false
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
-  gem 'factory_bot_rails', '~> 6.2.0'
-  gem 'rails-controller-testing', '~> 1.0.5'
-  gem 'rspec-rails', '~> 5.0.1'
-  gem 'rubocop', '~> 1.16', require: false
-  gem 'rubocop-rails', '~> 2.10.1'
 end
 
 group :development do
+  gem 'annotate'
   gem 'listen', '~> 3.3'
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
   gem 'web-console', '>= 4.1.0'
@@ -51,6 +47,12 @@ group :test do
   gem 'selenium-webdriver'
   # Easy installation and use of web drivers to run system tests with browsers
   gem 'webdrivers'
+  gem 'factory_bot_rails', '~> 6.2.0'
+  gem 'rails-controller-testing', '~> 1.0.5'
+  gem 'shoulda-matchers', '~> 4.0'
+  gem 'rspec-rails', '~> 5.0.1'
+  gem 'rubocop', '~> 1.16', require: false
+  gem 'rubocop-rails', '~> 2.10.1'
 end
 
 gem 'active_storage_validations', '~> 0.9.3'
